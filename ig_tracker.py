@@ -1,6 +1,8 @@
 import argparse
 import time
 import numpy as np
+import configparser
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -31,9 +33,18 @@ if __name__ == "__main__":
 
     driver.get("https://www.instagram.com/")
 
+    time.sleep(3)
+
     # Get username and password and enter them into login screen
-    username = input("Enter Instagram username: ")
-    password = input("Enter Instagram password: ")
+    parser = configparser.ConfigParser()
+    if os.path.isfile('config.ini'):
+        parser.read('config.ini')
+        username = parser.get('Login', 'Username')
+        password = parser.get('Login', 'Password')
+    else:
+        print('Config file not found, please enter login details manually:')
+        username = input("Enter Instagram username: ")
+        password = input("Enter Instagram password: ")
 
     driver.find_element_by_name('username').send_keys(username)
     driver.find_element_by_name('password').send_keys(password)
