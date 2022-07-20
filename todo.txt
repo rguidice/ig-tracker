@@ -1,4 +1,4 @@
-Catch wrong username/password errors
+* Catch wrong username/password errors
 Database:
 	* Implement database to store runs
 	* Ability to read old data before checking for new data
